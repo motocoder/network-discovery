@@ -8,6 +8,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.*;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -194,10 +195,19 @@ public class Searching {
                         logger.info("read firstLine: " + firstLine);
 
                         if (firstLine.equals(ServingData.FOUND_TERM)) {
-                            final String secondLine = in.readLine();
+
+                            String secondLine = in.readLine();
+                            List<String> data = new ArrayList<>();
+
+                            while(secondLine != null) {
+
+                                data.add(secondLine);
+                                secondLine = in.readLine();
+
+                            }
 
                             logger.info("found at " + host + ":" + port);
-                            callback.accept(new FoundConnection(host, Integer.parseInt(secondLine)));
+                            callback.accept(new FoundConnection(host, port, data));
                             return;
                         }
                     }
@@ -229,7 +239,7 @@ public class Searching {
 
     }
 
-    public record FoundConnection(String host, int port) {
+    public record FoundConnection(String host, int port, List<String> data) {
     }
 
 }

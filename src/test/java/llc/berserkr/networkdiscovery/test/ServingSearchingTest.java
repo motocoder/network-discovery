@@ -2,6 +2,7 @@ package llc.berserkr.networkdiscovery.test;
 
 import llc.berserkr.search.Searching;
 import llc.berserkr.serve.Serving;
+import llc.berserkr.serve.ServingData;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -17,7 +18,7 @@ public class ServingSearchingTest {
     @Test
     public void testSearchFindWithOthers() {
 
-        final Serving serving = new Serving(1501);
+        final Serving serving = new Serving(1501, ServingData.DATA);
         serving.start();
 
         try {
@@ -66,7 +67,7 @@ public class ServingSearchingTest {
     @Test
     public void testSearchDontFindWithOthers() {
 
-        final Serving serving = new Serving(1555);
+        final Serving serving = new Serving(1555, ServingData.DATA);
         serving.start();
 
         try {
